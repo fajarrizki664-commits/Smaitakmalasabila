@@ -1,0 +1,77 @@
+/* Custom styles: clamp card text, enforce uniform card heights, add Read Details link */
+.course .course-inner-text {
+  height: 380px; /* increased height so the card is taller and can show more content */
+  overflow: hidden;
+  position: relative;
+}
+.course .course-inner-text p {
+  color: #6c757d;
+  font-size: 14px;
+  line-height: 1.8;
+  /* Multi-line truncation */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 7; /* show 7 lines then ellipsis */
+  line-clamp: 7;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.course .course-inner-text .read-more {
+  display: inline-block;
+  margin-top: 8px;
+  color: #6f42c1;
+  cursor: pointer;
+  font-weight: 600;
+}
+@media (max-width: 991.98px) {
+  .course .course-inner-text {
+    height: auto;
+  }
+  .course .course-inner-text p {
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+  }
+}
+/* Make the card image area consistent so the cards align.
+   Use centered container + contain to avoid cropping student faces. */
+.course figure {
+  height: 360px; /* increased so images display fully */
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff; /* matches card background */
+}
+.course figure img {
+  /* Keep the whole image visible inside the figure without stretching */
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  /* shift focal point slightly down so faces are better framed */
+  object-position: center 50%;
+}
+
+/* Ensure the courses carousel doesn't sit under the hero/intro section
+   by adding extra top padding so images are fully visible. */
+.site-section.courses-entry-wrap {
+  padding-top: 220px; /* more space so hero doesn't overlap images */
+  position: relative;
+  z-index: 9999; /* ensure the courses section sits above the hero */
+}
+
+/* Ensure individual course cards allow the image to overflow vertically if needed */
+.owl-carousel,
+.owl-carousel .course,
+.nonloop-block-14 {
+  overflow: visible !important;
+}
+
+/* On smaller screens, reduce heights so layout remains usable */
+@media (max-width: 991.98px) {
+  .course figure { height: 220px; }
+  .course .course-inner-text { height: auto; }
+  .site-section.courses-entry-wrap { padding-top: 100px; }
+}
